@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "restaurant",
+    "djoser",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,35 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES":[
+      "rest_framework.renderers.BrowsableAPIRenderer",
+      "rest_framework.renderers.JSONRenderer",
+      "rest_framework_xml.renderers.XMLRenderer",
+      "rest_framework_yaml.renderers.YAMLRenderer",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES":(
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_THROTTLE_CLASSES":[
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES":{
+        "anon":"5/minute",
+        "user":"10/minute",
+    },
+    "DEFAULT_FILTER_BACKENDS":[
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
+    "DEFAULT_PAGINATION_CLASS":"rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE":4,
+}
+
+DJOSER = {
+    "USER_ID_FIELD":"username",
+}

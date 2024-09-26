@@ -7,6 +7,11 @@ name = "pypi"
 django = "*"
 mysqlclient = "*"
 djangorestframework = "*"
+djoser = "*"
+djangorestframework-xml = "*"
+djangorestframework-yaml = "*"
+bleach = "*"
+django-filter = "*"
 
 [dev-packages]
 
